@@ -37,5 +37,9 @@ public class Person {
 	int getAge() {
 		return this.age;
 	}
+	
+//	void m1() {
+//		System.out.println("Person class m1() method");
+//	}
 
 }

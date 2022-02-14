@@ -12,5 +12,9 @@ public class Student extends Person{
 	String getSec() {
 		return this.sec;
 	}
+	
+	void m1() {
+		System.out.println("Student class m1() method");
+	}
 
 }
