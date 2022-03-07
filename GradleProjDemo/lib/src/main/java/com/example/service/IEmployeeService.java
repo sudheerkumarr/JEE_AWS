@@ -11,7 +11,7 @@ public interface IEmployeeService {
 		Employee deleteEmployeeByName(String name);
 		Employee deleteEmployee(Employee employee);
 		Employee updateEmployee(int empId, Employee employee);
-		Employee getEmployeeByName(String name);
+		List<Employee> getEmployeeByName(String name);
 		Employee getEmployeeById(int empId);
-		List<Employee> getAllEmployee();
+		List<Employee> getAllEmployees();
 }

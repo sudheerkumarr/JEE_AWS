@@ -3,25 +3,28 @@ package com.example.service;
 import java.util.List;
 
 import com.example.bean.Employee;
+import com.example.repository.EmployeeRepositoryImpl;
+import com.example.repository.IEmployeeRepository;
 
 public class EmployeeServiceImpl implements IEmployeeService {
+	
+	IEmployeeRepository empRepo = new EmployeeRepositoryImpl();
 
 	@Override
 	public Employee addEmployee(Employee employee) {
-		
-		return null;
+		Employee emp = empRepo.addEmployee(employee);
+		return emp;
 	}
 
 	@Override
 	public Employee deleteEmployeeById(int empId) {
-		
-		return null;
+		return empRepo.deleteEmployeeById(empId);
 	}
 
 	@Override
 	public Employee deleteEmployeeByName(String name) {
 		
-		return null;
+		return empRepo.deleteEmployeeByName(name);
 	}
 
 	@Override
@@ -32,26 +35,27 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public Employee updateEmployee(int empId, Employee employee) {
-
-		return null;
+			
+		Employee emp = empRepo.updateEmployee(empId, employee);	
+		
+		return emp;
 	}
 
 	@Override
-	public Employee getEmployeeByName(String name) {
-		
-		return null;
+	public List<Employee> getEmployeeByName(String name) {
+		return empRepo.getEmployeeByName(name);
 	}
 
 	@Override
 	public Employee getEmployeeById(int empId) {
-		// TODO Auto-generated method stub
-		return null;
+		Employee emp = empRepo.getEmployeeById(empId);
+		return emp;
 	}
 
 	@Override
-	public List<Employee> getAllEmployee() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Employee> getAllEmployees() {
+		List<Employee> empList= empRepo.getAllEmployee();
+		return empList;
 	}
 
 }

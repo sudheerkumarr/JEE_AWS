@@ -1,11 +1,23 @@
 package com.example.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="emp")
 public class Employee {
 	
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
 	private Double salary;
+	@Column(name="design")
 	private String designation;
+	@Column(name="scheme")
 	private String insuranceScheme;
 	
 	
@@ -19,6 +31,7 @@ public class Employee {
 		this.designation = designation;
 		
 	}
+	
 	
 	// Getter & Setter
 	public int getId() {
