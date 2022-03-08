@@ -41,13 +41,18 @@
  */
 package com.example.pl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.example.bean.Account;
+import com.example.bean.Address;
 import com.example.bean.Employee;
+import com.example.bean.Skill;
 import com.example.service.EmployeeServiceImpl;
 import com.example.service.IEmployeeService;
+import com.example.service.ISkillService;
+import com.example.service.SkillServiceImpl;
 
 public class MyApp {
 
@@ -56,6 +61,7 @@ public class MyApp {
 		int id = 1000;
 		
 		IEmployeeService empServ = new EmployeeServiceImpl();
+		ISkillService skillServ = new SkillServiceImpl();
 
 		System.out.println("Select option from below: ");
 		System.out.println("1. Add Employee");
@@ -67,6 +73,10 @@ public class MyApp {
 		System.out.println("7. Delete Employee By Name");
 		System.out.println("8. Delete Employee By Employee Obj");
 		System.out.println("9. Get emp mail address");
+		System.out.println("10. Get Address details");
+		System.out.println("11. Add Skill");
+		System.out.println("12. Get Skill By Id");
+		
 		
 		int selectedOption = sc.nextInt();
 		
@@ -89,6 +99,25 @@ public class MyApp {
 			// Create Account obj
 			Account account = new Account(email, password);
 			
+			// Get Address details
+			System.out.println("Enter 1st city");
+			String city1 = sc.next();
+			System.out.println("Enter 1st state");
+			String state1 = sc.next();
+			Address addr1 = new Address(city1, state1);
+			
+			System.out.println("Enter 2nd city");
+			String city2 = sc.next();
+			System.out.println("Enter 2nd state");
+			String state2 = sc.next();
+			Address addr2 = new Address(city2, state2);
+			
+			List<Address> addrList = new ArrayList<>();
+			addrList.add(addr1);
+			addrList.add(addr2);
+	
+			
+			
 			// create emp obj and update properties using constructor
 //			Employee emp = new Employee(++id, empName, empSalary, empDesignation);
 //			System.out.println(emp);
@@ -101,7 +130,10 @@ public class MyApp {
 			emp.setSalary(empSalary);
 			emp.setDesignation(empDesignation);
 			emp.setAccount(account);
+			emp.setAddress(addrList);
 			
+			
+			// Add emp in the db.
 			Employee newEmp = empServ.addEmployee(emp);
 			System.out.println(newEmp);
 			System.out.println("Added "+newEmp.getName()+" successfully!");	
@@ -117,6 +149,17 @@ public class MyApp {
 			double eSalary = sc.nextDouble();
 			System.out.println("Enter employee designation");
 			String eDesignation = sc.next();
+			
+			System.out.println("Enter number of skills to be added");
+			int noOfSkills = sc.nextInt();
+			
+			List<Skill> skills = new ArrayList<>();
+			for(int i=0; i<noOfSkills;i++) {;//2
+				System.out.println("Enter Skill id"); //16- Java
+				int skillId= sc.nextInt();
+				Skill skill= skillServ.getSkillById(skillId);
+				skills.add(skill);
+			}
 		
 			// create emp 
 			Employee updateEmp = new Employee();
@@ -125,6 +168,7 @@ public class MyApp {
 			updateEmp.setName(eName);
 			updateEmp.setSalary(eSalary);
 			updateEmp.setDesignation(eDesignation);
+			updateEmp.setSkills(skills);
 			
 			// call service method to update emp details
 			Employee uEmp= empServ.updateEmployee(eId, updateEmp);
@@ -180,6 +224,30 @@ public class MyApp {
 			String email1 = empServ.getEmpEmail(eId2);
 			System.out.println(email1);
 			
+			break;
+		case 10:
+			// Get address details
+			System.out.println("Enter emp id");
+			int empId2= sc.nextInt();
+			List<Address> addresses= empServ.getAddressesByEmpId(empId2);
+			for(Address addr: addresses) {
+				System.out.println(addr);
+			}
+			break;
+		case 11:
+			// add skill
+			System.out.println("Enter skill name");
+			String skillName = sc.next();
+			Skill skill = new Skill(skillName);
+			Skill newSkill = skillServ.addSkill(skill);
+			System.out.println(newSkill.getName()+" added successfully!" );
+			break;
+		case 12:
+			// Get skill by id
+			System.out.println("Enter skill id");
+			int skillId = sc.nextInt();
+			Skill skill1 = skillServ.getSkillById(skillId);
+			System.out.println(skill1);
 			break;
 		default:
 				System.out.println("Enter any number between 1-8");

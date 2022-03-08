@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.List;
 
+import com.example.bean.Address;
 import com.example.bean.Employee;
 
 public interface IEmployeeService {
@@ -15,4 +16,5 @@ public interface IEmployeeService {
 		Employee getEmployeeById(int empId);
 		List<Employee> getAllEmployees();
 		String getEmpEmail(int eId2);
+		List<Address> getAddressesByEmpId(int eId);
 }

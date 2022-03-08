@@ -2,6 +2,7 @@ package com.example.repository;
 
 import java.util.List;
 
+import com.example.bean.Address;
 import com.example.bean.Employee;
 
 public interface IEmployeeRepository {
@@ -14,5 +15,6 @@ public interface IEmployeeRepository {
 	Employee getEmployeeById(int empId);
 	List<Employee> getAllEmployee();
 	String geEmpEmail(int eId2);
+	List<Address> getAddressesByEmpId(int eId);
 
 }

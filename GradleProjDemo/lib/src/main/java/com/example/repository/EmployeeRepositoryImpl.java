@@ -18,6 +18,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.example.bean.Address;
 import com.example.bean.Employee;
 
 public class EmployeeRepositoryImpl implements IEmployeeRepository {
@@ -29,6 +30,7 @@ public class EmployeeRepositoryImpl implements IEmployeeRepository {
 		EntityManager em= emf.createEntityManager();
 		
 		em.getTransaction().begin();
+		
 		
 		em.persist(employee);
 		
@@ -108,6 +110,7 @@ public class EmployeeRepositoryImpl implements IEmployeeRepository {
 		dbEmp.setName(employee.getName());
 		dbEmp.setDesignation(employee.getDesignation());
 		dbEmp.setSalary(employee.getSalary());
+		dbEmp.setSkills(employee.getSkills());
 		
 		// save employee with updated details
 		em.merge(dbEmp);
@@ -184,6 +187,20 @@ public class EmployeeRepositoryImpl implements IEmployeeRepository {
 		String email = (String)query.getSingleResult();
 		
 		return email;
+	}
+
+	@Override
+	public List<Address> getAddressesByEmpId(int eId) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+		EntityManager em= emf.createEntityManager();
+		System.out.println(eId);
+		//select addr.city, addr.state from Employee e join e.address addr where e.id=:id;
+		Query query = em.createQuery("select a from Employee e join e.address a where e.id=:id");
+		query.setParameter("id", eId);
+		//System.out.println(query.getSingleResult());
+		List<Address> addr = query.getResultList();
+		System.out.println(addr);
+		return addr;
 	}
 
 }

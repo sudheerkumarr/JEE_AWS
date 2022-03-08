@@ -2,19 +2,35 @@ package com.example.service;
 
 import java.util.List;
 
+import com.example.bean.Address;
 import com.example.bean.Employee;
+import com.example.bean.Skill;
 import com.example.repository.AccountRepositoryImpl;
+import com.example.repository.AddressRepositoryImpl;
 import com.example.repository.EmployeeRepositoryImpl;
 import com.example.repository.IAccountRepository;
+import com.example.repository.IAddressRepository;
 import com.example.repository.IEmployeeRepository;
+import com.example.repository.ISkillRepository;
+import com.example.repository.SkillRepositoryImpl;
 
 public class EmployeeServiceImpl implements IEmployeeService {
 	
 	IEmployeeRepository empRepo = new EmployeeRepositoryImpl();
 	IAccountRepository accRepo = new AccountRepositoryImpl();
+	IAddressRepository addrRepo = new AddressRepositoryImpl();
+	ISkillRepository skillRepo = new SkillRepositoryImpl();
 
 	@Override
 	public Employee addEmployee(Employee employee) {
+		List<Address> addresses= employee.getAddress();
+		for(Address addr: addresses) {
+			addrRepo.addAddress(addr);
+		}
+		List<Skill> skills= employee.getSkills();
+		for(Skill skill: skills) {
+			skillRepo.addSkill(skill);
+		}
 		accRepo.addAccount(employee.getAccount());
 		return empRepo.addEmployee(employee);
 	}
@@ -65,6 +81,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public String getEmpEmail(int eId2) {
 		
 		return empRepo.geEmpEmail(eId2);
+	}
+
+	@Override
+	public List<Address> getAddressesByEmpId(int eId) {
+		
+		return empRepo.getAddressesByEmpId(eId);
 	}
 
 }
