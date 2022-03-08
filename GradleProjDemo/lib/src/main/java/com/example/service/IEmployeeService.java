@@ -14,4 +14,5 @@ public interface IEmployeeService {
 		List<Employee> getEmployeeByName(String name);
 		Employee getEmployeeById(int empId);
 		List<Employee> getAllEmployees();
+		String getEmpEmail(int eId2);
 }

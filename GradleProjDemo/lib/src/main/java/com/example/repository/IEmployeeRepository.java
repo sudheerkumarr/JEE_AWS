@@ -13,5 +13,6 @@ public interface IEmployeeRepository {
 	List<Employee> getEmployeeByName(String name);
 	Employee getEmployeeById(int empId);
 	List<Employee> getAllEmployee();
+	String geEmpEmail(int eId2);
 
 }

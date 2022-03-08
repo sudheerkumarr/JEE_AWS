@@ -61,4 +61,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		return empList;
 	}
 
+	@Override
+	public String getEmpEmail(int eId2) {
+		
+		return empRepo.geEmpEmail(eId2);
+	}
+
 }

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Account {
@@ -15,11 +16,21 @@ public class Account {
 	private String email;
 	private String password;
 	
+	@OneToOne(mappedBy="account")
+	private Employee employee;
+	
 	// Constructors
 	public Account() {}
 	public Account(String email, String password) {
 		this.email = email;
 		this.password = password;
+	}
+	
+	public Account(String email, String password, Employee employee) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.employee = employee;
 	}
 	
 	// Getter & Setters
@@ -40,6 +51,12 @@ public class Account {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	@Override
 	public String toString() {

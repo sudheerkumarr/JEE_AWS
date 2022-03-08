@@ -171,4 +171,20 @@ public class EmployeeRepositoryImpl implements IEmployeeRepository {
 		return empList;
 	}
 
+	@Override
+	public String geEmpEmail(int eId2) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+		EntityManager em= emf.createEntityManager();
+		Employee emp = em.find(Employee.class, eId2);
+		
+		// select a.email from Employee e join Account a on e.getAccount().getId() = a.getId() where e.getId()=:id;
+		Query query = em.createQuery("select a.email from Employee e join Account a on e.getAccount().getId() = a.getId() where e.getId()=:id");
+		query.setParameter("id", eId2);
+		//Query query = em.createQuery("select a.email from Employee e join Account a on emp.getAccount().getId()=a.getId()");
+		
+		String email = (String)query.getSingleResult();
+		
+		return email;
+	}
+
 }

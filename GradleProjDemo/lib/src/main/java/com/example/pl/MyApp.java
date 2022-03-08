@@ -66,6 +66,7 @@ public class MyApp {
 		System.out.println("6. Get All Employees");
 		System.out.println("7. Delete Employee By Name");
 		System.out.println("8. Delete Employee By Employee Obj");
+		System.out.println("9. Get emp mail address");
 		
 		int selectedOption = sc.nextInt();
 		
@@ -171,6 +172,14 @@ public class MyApp {
 			break;
 			
 		case 8:
+			break;
+		case 9:
+			// get email using emp id
+			System.out.println("Enter emp id");
+			int eId2= sc.nextInt();
+			String email1 = empServ.getEmpEmail(eId2);
+			System.out.println(email1);
+			
 			break;
 		default:
 				System.out.println("Enter any number between 1-8");
