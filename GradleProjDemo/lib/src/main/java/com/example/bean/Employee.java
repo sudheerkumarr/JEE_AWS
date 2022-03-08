@@ -1,9 +1,12 @@
+
 package com.example.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,12 @@ public class Employee {
 	private String insuranceScheme;
 	
 	
+	@OneToOne
+	@JoinColumn(name="accountId")
+	private Account account;
+	
+	
+	
 	// Constructors
 	public Employee() {}
 	public Employee(int id, String name, Double salary, String designation) {
@@ -32,6 +41,13 @@ public class Employee {
 		
 	}
 	
+	public Employee(String name, Double salary, String designation, Account account) {
+		super();
+		this.name = name;
+		this.salary = salary;
+		this.designation = designation;
+		this.account = account;
+	}
 	
 	// Getter & Setter
 	public int getId() {
@@ -65,6 +81,12 @@ public class Employee {
 		this.insuranceScheme = insuranceScheme;
 	}
 	
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + ", designation=" + designation
 				+ ", insuranceScheme=" + insuranceScheme + "]";

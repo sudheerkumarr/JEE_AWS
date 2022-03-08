@@ -1,8 +1,50 @@
+/*
+ * Relationships
+ *  OneToOne
+ *  OneToMany
+ *  ManyToOne
+ *  ManyToMany
+ *  
+ *  Employee & Department
+ *  One Employee One Depart - OneToOne - ManyToOne
+ *  One Department Many Employees - OneToMany
+ *  
+ *  
+ *  Employee & Account - OneToOne
+ *  One Employee One Account
+ *  One Account One Employee
+ *  
+ *   Employee & Address 
+ *   One Employee - Many Addresses - OneToMany
+ *   One Address - One Employee  - ManyToOne
+ *   
+ *   
+ *   Employee & Profile - OneToOne
+ *   One Employee - One Profile
+ *   One Profile - One Employee
+ *   
+ *   Employee & Skills - ManyToMany
+ *   One Employee - Many Skills 
+ *   One Skill - Many Employees 
+ *   
+ *   Author & Book - ManyToMany - New table will be created to keep mapping information
+ *   One Author - Many Book
+ *   One Book - Many Author 
+ *   
+ *  Directions
+ *   Unidirectional
+ *   Bidirectional 
+ *   
+ *  
+ *  
+ *  
+ */
 package com.example.pl;
 
 import java.util.List;
 import java.util.Scanner;
 
+import com.example.bean.Account;
 import com.example.bean.Employee;
 import com.example.service.EmployeeServiceImpl;
 import com.example.service.IEmployeeService;
@@ -37,6 +79,15 @@ public class MyApp {
 			System.out.println("Enter employee designation");
 			String empDesignation = sc.next();
 			
+			// Get Account details
+			System.out.println("Enter email address");
+			String email = sc.next();
+			System.out.println("Enter password");
+			String password = sc.next();
+			
+			// Create Account obj
+			Account account = new Account(email, password);
+			
 			// create emp obj and update properties using constructor
 //			Employee emp = new Employee(++id, empName, empSalary, empDesignation);
 //			System.out.println(emp);
@@ -48,6 +99,7 @@ public class MyApp {
 			emp.setName(empName);
 			emp.setSalary(empSalary);
 			emp.setDesignation(empDesignation);
+			emp.setAccount(account);
 			
 			Employee newEmp = empServ.addEmployee(emp);
 			System.out.println(newEmp);

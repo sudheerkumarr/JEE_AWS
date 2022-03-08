@@ -3,17 +3,20 @@ package com.example.service;
 import java.util.List;
 
 import com.example.bean.Employee;
+import com.example.repository.AccountRepositoryImpl;
 import com.example.repository.EmployeeRepositoryImpl;
+import com.example.repository.IAccountRepository;
 import com.example.repository.IEmployeeRepository;
 
 public class EmployeeServiceImpl implements IEmployeeService {
 	
 	IEmployeeRepository empRepo = new EmployeeRepositoryImpl();
+	IAccountRepository accRepo = new AccountRepositoryImpl();
 
 	@Override
 	public Employee addEmployee(Employee employee) {
-		Employee emp = empRepo.addEmployee(employee);
-		return emp;
+		accRepo.addAccount(employee.getAccount());
+		return empRepo.addEmployee(employee);
 	}
 
 	@Override
