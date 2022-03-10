@@ -18,7 +18,7 @@ public interface IEmployeeService {
 	// delete employee
 	Employee deleteEmpById(int id);
 	// update emp name
-	Employee updateEmpByName(String name);
+	Employee updateEmpByName(int empId, String name);
 	// update emp salary
 	Employee updateEmpSalary(int id, double salary);
 	

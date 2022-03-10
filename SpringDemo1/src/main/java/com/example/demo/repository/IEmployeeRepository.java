@@ -8,4 +8,6 @@ import com.example.demo.bean.Employee;
 @Repository
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 	// get emp by name
+	Employee findByEmpName(String name);
+	Employee findBySalary(double salary);
 }

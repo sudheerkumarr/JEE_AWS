@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	@Override
 	public Employee getEmpByName(String name) {
 		
-		return null;
+		return empRepo.findByEmpName(name);
 	}
 
 	@Override
@@ -39,8 +39,15 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	@Override
 	public Employee updateEmployee(Employee employee) {
 		// Check given emp is there in db or not
-		// update emp details
-		return null;
+		Employee emp = empRepo.getById(employee.getEmpId());
+		
+		if(emp!=null) {
+			// update emp
+			empRepo.save(employee);
+			return emp;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -48,14 +55,28 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		// Check given emp is there in db or not
 		Employee emp = empRepo.getById(id);
 		// delete emp
-		empRepo.deleteById(id);
-		return emp;
+		if(emp!=null) {
+			empRepo.deleteById(id);
+			return emp;
+		} else {
+			return null;
+		}
+		
 	}
 
 	@Override
-	public Employee updateEmpByName(String name) {
+	public Employee updateEmpByName(int empId, String name) {
+		// Check given emp is there in db or not
+				Employee emp = empRepo.getById(empId);
+				// delete emp
+				if(emp!=null) {
+					emp.setEmpName(name);
+					empRepo.save(emp);
+					return emp;
+				} else {
+					return null;
+				}		
 		
-		return null;
 	}
 
 	@Override
