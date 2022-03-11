@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.bean.Employee;
+import com.example.demo.dto.EmployeeDto;
 
 public interface IEmployeeService {
 	// get all employees
@@ -12,7 +13,7 @@ public interface IEmployeeService {
 	// get emp based on name
 	Employee getEmpByName(String name);
 	// add emp
-	Employee addEmployee(Employee employee);
+	EmployeeDto addEmployee(Employee employee);
 	// update employee
 	Employee updateEmployee(Employee employee);
 	// delete employee

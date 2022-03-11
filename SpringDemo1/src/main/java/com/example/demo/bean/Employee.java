@@ -1,8 +1,11 @@
 package com.example.demo.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,8 +35,12 @@ public class Employee {
 	//@Getter
 	//@Setter
 	private String empName;
-	
+	private String contactNo;
 	private  double salary;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="loginId")
+	private Login login;
 	
 	// Constructors
 	//Getters &Setters

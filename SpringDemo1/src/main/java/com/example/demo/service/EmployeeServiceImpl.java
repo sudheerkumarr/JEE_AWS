@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.Employee;
+import com.example.demo.bean.Login;
+import com.example.demo.dto.EmployeeDto;
+import com.example.demo.dto.LoginDto;
 import com.example.demo.repository.IEmployeeRepository;
 
 @Service
@@ -31,9 +34,23 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	}
 
 	@Override
-	public Employee addEmployee(Employee employee) {
+	public EmployeeDto addEmployee(Employee employee) {
+		// Convert Employee to Employee Dto
+		Employee emp = empRepo.save(employee);
+		EmployeeDto empDto = new EmployeeDto();
+		empDto.setEmpName(emp.getEmpName());
+		empDto.setContactNo(emp.getContactNo());
 		
-		return empRepo.save(employee);
+		// convert Login to LoginDto
+		Login login = emp.getLogin();
+		LoginDto loginDto = new LoginDto();
+		loginDto.setEmail(login.getEmail());
+		loginDto.setLogin(login.isLogin());
+		
+		empDto.setLoginDto(loginDto);
+		
+		// return EmployeeDto
+		return empDto;
 	}
 
 	@Override
