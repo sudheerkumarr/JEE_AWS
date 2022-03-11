@@ -1,10 +1,15 @@
 package com.example.demo.bean;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -41,6 +46,19 @@ public class Employee {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="loginId")
 	private Login login;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="empId")
+	private List<Address> address;
+	
+	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+		name = "employee_skill", 
+		joinColumns = { @JoinColumn(name = "emp_id") }, 
+		inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+	)
+	private List<Skill> skills;
 	
 	// Constructors
 	//Getters &Setters
