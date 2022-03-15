@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.example.demo.bean.Employee;
 import com.example.demo.bean.Login;
 import com.example.demo.dto.EmployeeDto;
 import com.example.demo.dto.LoginDto;
+import com.example.demo.exception.EmployeeNotFoundException;
 import com.example.demo.repository.IEmployeeRepository;
 
 @Service
@@ -24,7 +26,15 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public Employee getEmpById(int id) {
-		return empRepo.getById(id);
+		Optional<Employee> opt = empRepo.findById(id);
+		if(!opt.isPresent()) {
+			throw new EmployeeNotFoundException("Employee not found with the given id: "+id);
+		}
+//		Employee emp = empRepo.getById(id);
+//		if(emp==null) {
+//			throw new EmployeeNotFoundException("Employee not fouud with the id "+id);
+//		}
+		return opt.get();
 	}
 
 	@Override
@@ -56,28 +66,25 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	@Override
 	public Employee updateEmployee(Employee employee) {
 		// Check given emp is there in db or not
-		Employee emp = empRepo.getById(employee.getEmpId());
-		
-		if(emp!=null) {
-			// update emp
-			empRepo.save(employee);
-			return emp;
-		} else {
-			return null;
+				
+		Optional<Employee> opt = empRepo.findById(employee.getEmpId());
+		if(!opt.isPresent()) {
+			throw new EmployeeNotFoundException("Employee not found with the given id: "+ employee.getEmpId());
 		}
+		return empRepo.save(employee);
+		
 	}
 
 	@Override
 	public Employee deleteEmpById(int id) {
 		// Check given emp is there in db or not
-		Employee emp = empRepo.getById(id);
-		// delete emp
-		if(emp!=null) {
-			empRepo.deleteById(id);
-			return emp;
-		} else {
-			return null;
+		Optional<Employee> opt = empRepo.findById(id);
+		if(!opt.isPresent()) {
+			throw new EmployeeNotFoundException("Employee not found with the given id: "+id);
 		}
+		// delete emp
+		empRepo.deleteById(id);
+		return opt.get();
 		
 	}
 

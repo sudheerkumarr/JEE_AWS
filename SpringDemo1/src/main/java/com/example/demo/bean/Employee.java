@@ -1,5 +1,7 @@
 package com.example.demo.bean;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,6 +44,7 @@ public class Employee {
 	private String empName;
 	private String contactNo;
 	private  double salary;
+	
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="loginId")
