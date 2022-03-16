@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.Employee;
 import com.example.demo.bean.Login;
+import com.example.demo.dto.EmpInputDto;
+import com.example.demo.dto.EmpOutputDto;
 import com.example.demo.dto.EmployeeDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.exception.EmployeeNotFoundException;
@@ -18,7 +20,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	
 	@Autowired
 	IEmployeeRepository empRepo;
-
+	
+	
 	@Override
 	public List<Employee> getAllEmployees() {
 		return empRepo.findAll();
@@ -107,6 +110,33 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public Employee updateEmpSalary(int id, double salary) {
 		
 		return null;
+	}
+
+	@Override
+	public EmpOutputDto addEmployeeDto(EmpInputDto empInputDto) {
+		
+		// Convert EmpInputDto obj to Employee obj
+		Employee emp = new Employee();
+		emp.setEmpName(empInputDto.getEmpName());
+		emp.setContactNo(empInputDto.getContactNo());
+		//create Login object
+		Login login = new Login();
+		login.setEmail(empInputDto.getEmail());
+		login.setPassword(empInputDto.getPassword());
+		
+		// add login obj to emp
+		emp.setLogin(login);
+
+		// Persist emp object in db
+		Employee newEmp= empRepo.save(emp);
+		
+		// Convert Employee obj to EmpOutputDto obj
+		EmpOutputDto empOutputDto = new EmpOutputDto();
+		empOutputDto.setEmpName(newEmp.getEmpName());
+		empOutputDto.setContactNo(newEmp.getContactNo());
+		empOutputDto.setEmail(newEmp.getLogin().getEmail());
+		
+		return empOutputDto;
 	}
 
 }

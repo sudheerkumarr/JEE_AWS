@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.Employee;
+import com.example.demo.dto.EmpInputDto;
+import com.example.demo.dto.EmpOutputDto;
 import com.example.demo.dto.EmployeeDto;
 import com.example.demo.service.IEmployeeService;
 
@@ -41,6 +43,13 @@ public class EmployeeController {
 	@PostMapping("/employees")
 	ResponseEntity<EmployeeDto> addEmployee(@RequestBody Employee emp) {
 		EmployeeDto newEmp =  empServ.addEmployee(emp);
+		return new ResponseEntity<>(newEmp, HttpStatus.CREATED);//201 created
+	}
+	
+	// add emp
+	@PostMapping("/employees/dto")
+	ResponseEntity<EmpOutputDto> addEmployeeDto(@RequestBody EmpInputDto emp) {
+		EmpOutputDto newEmp =  empServ.addEmployeeDto(emp);
 		return new ResponseEntity<>(newEmp, HttpStatus.CREATED);//201 created
 	}
 	

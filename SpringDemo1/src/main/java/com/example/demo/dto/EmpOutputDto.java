@@ -5,8 +5,9 @@ import com.example.demo.bean.Login;
 import lombok.Data;
 
 @Data
-public class EmployeeDto {
+public class EmpOutputDto {
 	private String empName;
 	private String contactNo;
-	private LoginDto loginDto;
+	// private LoginDto loginDto;
+	private String email;
 }

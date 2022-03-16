@@ -41,6 +41,14 @@ dependencies {
 	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
 	//implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
 	
+	// https://mvnrepository.com/artifact/com.h2database/h2
+	testImplementation group: 'com.h2database', name: 'h2', version: '1.4.193'
+
+	// https://mvnrepository.com/artifact/net.sourceforge.javydreamercsw/H2-Driver
+	implementation group: 'net.sourceforge.javydreamercsw', name: 'H2-Driver', version: '0.1'
+	
+	
+	
 	
 
 }

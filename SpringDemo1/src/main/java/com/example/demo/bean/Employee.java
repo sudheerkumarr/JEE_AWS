@@ -43,7 +43,7 @@ public class Employee {
 	//@Setter
 	private String empName;
 	private String contactNo;
-	private  double salary;
+	private  double salary; //0.0
 	
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -52,7 +52,7 @@ public class Employee {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="empId")
-	private List<Address> address;
+	private List<Address> address;// null
 	
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
@@ -61,7 +61,7 @@ public class Employee {
 		joinColumns = { @JoinColumn(name = "emp_id") }, 
 		inverseJoinColumns = { @JoinColumn(name = "skill_id") }
 	)
-	private List<Skill> skills;
+	private List<Skill> skills;//null
 	
 	// Constructors
 	//Getters &Setters
