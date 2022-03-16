@@ -14,7 +14,7 @@ public class Login {
 	@Id
 	private String email;
 	private String password;
-	//@JsonIgnore
+	@JsonIgnore
 	private boolean isLogin;
 	
 	

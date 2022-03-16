@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.bean.Employee;
+import com.example.demo.bean.Skill;
 import com.example.demo.dto.EmpInputDto;
 import com.example.demo.dto.EmpOutputDto;
 import com.example.demo.dto.EmployeeDto;
@@ -25,5 +26,8 @@ public interface IEmployeeService {
 	Employee updateEmpByName(int empId, String name);
 	// update emp salary
 	Employee updateEmpSalary(int id, double salary);
+	
+	// Add skill to employee
+	Employee addSkillByEmpId(int empId, List<Skill> skills);
 	
 }

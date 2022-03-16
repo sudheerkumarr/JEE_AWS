@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.bean.Employee;
 import com.example.demo.bean.Login;
+import com.example.demo.bean.Skill;
 import com.example.demo.dto.EmpInputDto;
 import com.example.demo.dto.EmpOutputDto;
 import com.example.demo.dto.EmployeeDto;
@@ -137,6 +138,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		empOutputDto.setEmail(newEmp.getLogin().getEmail());
 		
 		return empOutputDto;
+	}
+
+	@Override
+	public Employee addSkillByEmpId(int empId, List<Skill> skills) {
+		Optional<Employee> opt = empRepo.findById(empId);
+		if(!opt.isPresent()) {
+			throw new EmployeeNotFoundException("Employee not found with the given id: "+ empId);
+		}
+		Employee emp = opt.get();
+		emp.setSkills(skills);
+		return empRepo.save(emp);
 	}
 
 }

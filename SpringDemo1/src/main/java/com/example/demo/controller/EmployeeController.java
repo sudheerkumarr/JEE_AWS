@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.Employee;
+import com.example.demo.bean.Skill;
 import com.example.demo.dto.EmpInputDto;
 import com.example.demo.dto.EmpOutputDto;
 import com.example.demo.dto.EmployeeDto;
@@ -53,6 +54,12 @@ public class EmployeeController {
 		return new ResponseEntity<>(newEmp, HttpStatus.CREATED);//201 created
 	}
 	
+	// Add skill
+	@PostMapping("/employees/{empId}")
+	ResponseEntity<Employee> addSkillByEmpId(@PathVariable("empId") int empId, @RequestBody List<Skill> skills) {
+		Employee newEmp =  empServ.addSkillByEmpId(empId, skills);
+		return new ResponseEntity<>(newEmp, HttpStatus.CREATED);//201 created
+	}
 	// delete employee
 	@DeleteMapping("/employees/{id}")
 	ResponseEntity<Employee> deleteEmployee(@PathVariable("id") int id) {

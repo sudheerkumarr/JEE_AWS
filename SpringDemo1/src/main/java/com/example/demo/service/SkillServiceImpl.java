@@ -2,10 +2,18 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.bean.Skill;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.example.demo.bean.Skill;
+import com.example.demo.repository.ISkillRepository;
+
+@Service
 public class SkillServiceImpl implements ISkillService {
 
+	@Autowired
+	ISkillRepository skillRepo;
+	
 	@Override
 	public List<Skill> getAllSkills() {
 		// TODO Auto-generated method stub
@@ -20,8 +28,8 @@ public class SkillServiceImpl implements ISkillService {
 
 	@Override
 	public Skill addSkill(Skill skill) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return skillRepo.save(skill);
 	}
 
 	@Override
