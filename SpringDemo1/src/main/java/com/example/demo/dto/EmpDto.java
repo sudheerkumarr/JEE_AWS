@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmpInputDto {
-	
-	private String empName;
-	private String email;
-	private String password;
-	private String contactNo;
+public class EmpDto {
 
+	private int empId;
+	private String empName;
+	private String contactNo;
+	private String email;
 }

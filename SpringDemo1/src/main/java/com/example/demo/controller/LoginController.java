@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,7 @@ public class LoginController {
 	ILoginService loginServ;
 
 	@PostMapping("/login")
-	ResponseEntity<Login> login(@RequestBody Login login) {
+	ResponseEntity<Login> login(@Valid @RequestBody Login login) {
 		Login log = loginServ.login(login);
 		return new ResponseEntity<>(log, HttpStatus.OK);
 	};

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.bean.Employee;
 import com.example.demo.bean.Skill;
+import com.example.demo.dto.EmpDto;
 import com.example.demo.dto.EmpInputDto;
 import com.example.demo.dto.EmpOutputDto;
 import com.example.demo.dto.EmployeeDto;
@@ -29,5 +30,7 @@ public interface IEmployeeService {
 	
 	// Add skill to employee
 	Employee addSkillByEmpId(int empId, List<Skill> skills);
+	//List<Employee> getAllEmpBasedOnSkillId(int skillId);
+	List<EmpDto> getAllEmpBasedOnSkillId(int skillId);
 	
 }

@@ -13,6 +13,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,9 +44,21 @@ public class Employee {
 	@GeneratedValue
 	private int empId;
 	
+	
+	public Employee(int empId, String empName, String contactNo) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.contactNo = contactNo;
+	}
+
+
 	//@Getter
 	//@Setter
+	@NotEmpty(message="Name shouldn't be empty")
+	@Size(min=3, max=50, message="Min 3 characters required")
 	private String empName;
+	@Length(min=10, max=10)
 	private String contactNo;
 	private  double salary; //0.0
 	

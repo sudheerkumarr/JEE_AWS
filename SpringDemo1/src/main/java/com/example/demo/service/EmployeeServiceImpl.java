@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.bean.Employee;
 import com.example.demo.bean.Login;
 import com.example.demo.bean.Skill;
+import com.example.demo.dto.EmpDto;
 import com.example.demo.dto.EmpInputDto;
 import com.example.demo.dto.EmpOutputDto;
 import com.example.demo.dto.EmployeeDto;
@@ -150,5 +152,31 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		emp.setSkills(skills);
 		return empRepo.save(emp);
 	}
+	
+//	@Override
+//	public List<Employee> getAllEmpBasedOnSkillId(int skillId) {
+//		return empRepo.getAllEmpBasedOnSkillId(skillId);
+//	}
 
+	@Override
+	public List<EmpDto> getAllEmpBasedOnSkillId(int skillId) {
+		List<Employee> employeeList = empRepo.getAllEmpBasedOnSkillId(skillId);
+		
+		// Convert List<Employee> to List<EmpDto>
+		List<EmpDto> empDtoList = new ArrayList<>();
+		
+		for(Employee emp :employeeList) {
+			// Create EmpDto Obj
+			EmpDto empDto = new EmpDto();
+			// Update EmpDto obj properties
+			empDto.setEmpId(emp.getEmpId());
+			empDto.setEmpName(emp.getEmpName());
+			empDto.setContactNo(emp.getContactNo());
+			empDto.setEmail(emp.getLogin().getEmail());
+			// add empDto to empDtoList
+			empDtoList.add(empDto);
+		}
+		// return empDtoList
+		return empDtoList;
+	}
 }

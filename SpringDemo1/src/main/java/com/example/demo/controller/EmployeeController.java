@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bean.Employee;
 import com.example.demo.bean.Skill;
+import com.example.demo.dto.EmpDto;
 import com.example.demo.dto.EmpInputDto;
 import com.example.demo.dto.EmpOutputDto;
 import com.example.demo.dto.EmployeeDto;
@@ -49,7 +52,7 @@ public class EmployeeController {
 	
 	// add emp
 	@PostMapping("/employees/dto")
-	ResponseEntity<EmpOutputDto> addEmployeeDto(@RequestBody EmpInputDto emp) {
+	ResponseEntity<EmpOutputDto> addEmployeeDto(@Valid @RequestBody EmpInputDto emp) {
 		EmpOutputDto newEmp =  empServ.addEmployeeDto(emp);
 		return new ResponseEntity<>(newEmp, HttpStatus.CREATED);//201 created
 	}
@@ -87,5 +90,11 @@ public class EmployeeController {
 	ResponseEntity<Employee> getEmpByName(@PathVariable("name") String empName) {
 		Employee emp = empServ.getEmpByName(empName);
 		return new ResponseEntity<>(emp, HttpStatus.OK);
+	}
+	
+	@GetMapping("/skills/{skillId}")
+	ResponseEntity<List<EmpDto>> getAllEmpBasedOnSkillId(@PathVariable("skillId") int skillId) {
+		List<EmpDto> employees = empServ.getAllEmpBasedOnSkillId(skillId);
+		return new ResponseEntity<>(employees, HttpStatus.OK);
 	}
 }

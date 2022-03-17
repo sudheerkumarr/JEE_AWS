@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.bean.Employee;
 import com.example.demo.bean.Skill;
+import com.example.demo.dto.EmpDto;
 import com.example.demo.repository.ISkillRepository;
 
 @Service
@@ -16,14 +18,14 @@ public class SkillServiceImpl implements ISkillService {
 	
 	@Override
 	public List<Skill> getAllSkills() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return skillRepo.findAll();
 	}
 
 	@Override
 	public Skill getSkillById(int skillId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return skillRepo.getById(skillId);
 	}
 
 	@Override
@@ -34,14 +36,16 @@ public class SkillServiceImpl implements ISkillService {
 
 	@Override
 	public Skill deleteSkillById(int skillId) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Skill updateSkill(Skill skill) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
+
+	
 
 }
